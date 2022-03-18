@@ -34,14 +34,26 @@ weatherForm.addEventListener('submit', (e) => {
 
     fetch('/weather?address=' + search.value).then((response) => {
         response.json().then((data) => {
+            message1.textContent = ''
+            message2.textContent = ''
+            message3.textContent = ''
+            message4.textContent = ''
+            message5.textContent = ''
+            message6.textContent = ''
+            message7.textContent = ''
+            message8.textContent = ''
+
             if (data.error) {
                 message1.textContent = data.error
-                message2.textContent = ''
-            }
-            else {
-                message1.textContent = ''
-                message2.textContent = 'The temperature in ' + data.location + ' is ' + 
-                data.temperature + ' ' + data.unit + '!!'
+            } else {
+                console.log(data)
+                message2.textContent = 'Location: ' + data.location
+                message3.textContent = 'Temperature in °C: ' + data.temperature
+                message4.textContent = 'Feels like temperature in °C: ' + data.feels_like
+                message5.textContent = 'Pressure in millibars: ' + data.pressure
+                message6.textContent = 'Precipitation in millimeters: ' + data.precipitation
+                message7.textContent = 'Humidity: ' + data.humidity
+                message8.textContent = 'Wind speed in killometers per hour: ' + data.wind_speed
             }
         })
     })

@@ -17,9 +17,14 @@ const weather = (lat, long, callback) => {
             callback('Some error occurred while fetching the weather information on ' 
                 + address + '. Err Msg: ' + body.error.message, undefined)
         } else {
+            // console.log(body)
             callback(undefined, {
-                temperature: body.current.temp_c,
-                unit: 'Degree Celsius'
+                temperature_in_celcius: body.current.temp_c,
+                feels_like_celcius: body.current.feelslike_c,
+                pressure_in_millibars: body.current.pressure_mb,
+                precipitation_in_millimeters: body.current.precip_mm,
+                humidity: body.current.humidity,
+                wind_speed: body.current.gust_kph
             })
         }
     })

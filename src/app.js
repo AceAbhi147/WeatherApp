@@ -58,7 +58,7 @@ app.get('/weather', (req, res) => {
                 error: errorMessage
             })
         } else {
-            weather(latitude, longitude, (errorMessage, { temperature, unit } = {}) => {
+            weather(latitude, longitude, (errorMessage, response) => {
                 if (errorMessage) {
                     // console.log(errorMessage)
                     return res.send({
@@ -66,10 +66,13 @@ app.get('/weather', (req, res) => {
                     })
                 }
                 res.send({
-                    temperature,
-                    unit,
-                    address: req.query.address,
-                    location
+                    location,
+                    temperature: response.temperature_in_celcius,
+                    feels_like: response.feels_like_celcius,
+                    pressure: response.pressure_in_millibars,
+                    precipitation : response.precipitation_in_millimeters,
+                    humidity: response.humidity,
+                    wind_speed: response.wind_speed
                 })
             })
         }
